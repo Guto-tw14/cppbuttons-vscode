@@ -1,0 +1,162 @@
+{
+	"name": "cppbuttons",
+	"displayName": "compile & run buttons - c++",
+	"description": "this extension add buttons to compile-release, compile-debug and run. For c++/c",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.62.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:cpp",
+		"onLanguage:c"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "cppbuttons.release",
+				"title": "Release Build",
+				"icon": {
+					"dark": "svg/build_dark.svg",
+					"light": "svg/build_light.svg"
+				}
+			},
+			{
+				"command": "cppbuttons.debug",
+				"title": "Debug build",
+				"icon": {
+					"dark": "svg/build-debug_dark.svg",
+					"light": "svg/build-debug_light.svg"
+				}
+			},
+			{
+				"command": "cppbuttons.run",
+				"title": "Run",
+				"icon": {
+					"dark": "svg/run_dark.svg",
+					"light": "svg/run_light.svg"
+				}
+			},
+			{
+				"command": "cppbuttons.make",
+				"title": "Make",
+				"icon": {
+					"dark": "svg/make_dark.svg",
+					"light": "svg/make_light.svg"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "editorLangId == cpp || editorLangId == c",
+					"command": "cppbuttons.release",
+					"group": "navigation"
+				},
+				{
+					"when": "editorLangId == cpp || editorLangId == c",
+					"command": "cppbuttons.debug",
+					"group": "navigation"
+				},
+				{
+					"when": "editorLangId == cpp || editorLangId == c",
+					"command": "cppbuttons.run",
+					"group": "navigation"
+				},
+				{
+					"when": "editorLangId == cpp || editorLangId == c",
+					"command": "cppbuttons.make",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "c++ buttons",
+			"properties": {
+				"cppbuttons.compiler": {
+					"type": "string",
+					"default": "gcc",
+					"scope": "resource",
+					"enum": [
+						"gcc",
+						"MSVC",
+						"other"
+					]
+				},
+				"cppbuttons.release gcc command": {
+					"type": "string",
+					"default": "g++ {file} -O3 -o {exe}"
+				},
+				"cppbuttons.release MSVC command": {
+					"type": "string",
+					"default": "cl {file} /O2 /Fe {exe}"
+				},
+				"cppbuttons.release \"other\" command": {
+					"type": "string",
+					"default": ""
+				},
+				"cppbuttons.debug gcc command": {
+					"type": "string",
+					"default": "g++ {file} -O0 -g -o {exe}"
+				},
+				"cppbuttons.debug MSVC command": {
+					"type": "string",
+					"default": "cl {file} /O2 /Fe {exe}"
+				},
+				"cppbuttons.debug \"other\" command": {
+					"type": "string",
+					"default": ""
+				},
+				"cppbuttons.ask parameters when run": {
+					"type": "boolean",
+					"default": false
+				},
+				"cppbuttons.release output folder": {
+					"type": "string",
+					"default": "./release",
+					"description": "write \"default\" if you want the files to be in the same folder as your code"
+				},
+				"cppbuttons.debug output folder": {
+					"type": "string",
+					"default": "./debug",
+					"description": "write \"default\" if you want the files to be in the same folder as your code"
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "cpp-buttons-output",
+				"mimetypes": [
+					"text/x-code-output"
+				]
+			}
+		],
+		"grammars": [
+			{
+				"language": "cpp-buttons-output",
+				"scopeName": "cpp-buttons.output",
+				"path": "./syntaxes/output.tmLanguage.json"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.62.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2"
+	}
+}
