@@ -85,7 +85,6 @@ function activate(context) {
 	});
 
 	let debug = vscode.commands.registerCommand('cppbuttons.debug', function () {
-		folder.sendText("mkdir " + r_folder)
 		if (d_folder === "default") {
 			switch (vscode.workspace.getConfiguration().get("cppbuttons.compiler")) {
 				case "gcc":
@@ -102,6 +101,7 @@ function activate(context) {
 					break;
 			}
 		} else {
+			folder.sendText("mkdir " + d_folder)
 			switch (vscode.workspace.getConfiguration().get("cppbuttons.compiler")) {
 				case "gcc":
 					gcc.show(false)

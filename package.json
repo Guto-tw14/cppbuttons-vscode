@@ -126,22 +126,7 @@
 					"description": "write \"default\" if you want the files to be in the same folder as your code"
 				}
 			}
-		},
-		"languages": [
-			{
-				"id": "cpp-buttons-output",
-				"mimetypes": [
-					"text/x-code-output"
-				]
-			}
-		],
-		"grammars": [
-			{
-				"language": "cpp-buttons-output",
-				"scopeName": "cpp-buttons.output",
-				"path": "./syntaxes/output.tmLanguage.json"
-			}
-		]
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
